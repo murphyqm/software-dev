@@ -7,6 +7,9 @@ import matplotlib
 
 st.set_page_config(page_title="Sustainable Software Development", page_icon="👋")
 
+# with open( ".streamlit/style.css" ) as css:
+#     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
+
 hide_default_format = """
        <style>
        #MainMenu {visibility: hidden; }
