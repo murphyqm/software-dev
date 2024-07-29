@@ -25,14 +25,23 @@ md_intro="""
 Access this page at **URL printed here**
 """
 
+md_quick_links = """
+## Useful links
+
+- Python Project Template (GitHub): [bit.ly/python-template](https://bit.ly/python-template)
+- GitHub Discussions (for polls etc.): [bit.ly/gh_discussions](https://bit.ly/gh_discussions)
+"""
+
+with st.sidebar:
+    st.write(md_quick_links)
+
 st.write(md_intro)
 
 st.subheader("Tutorial format")
 
 md_intro_01="""
 1. This is an interactive session, but we only have two hours so will be moving pretty quickly...
-    - Feel free to just listen and then replicate the steps yourself later.
-    - All the instructions are here and hopefully are easy to follow independently, but you can email me if you have any questions or issues.
+    - I will run through some live coding/project set-up and tools, but will let you run through the content yourself afterwards
 2. This webapp will stay live; however, I may update it and change the content going forward. Please `fork` your own copy on GitHub to snapshot it, and feel free to download the presentation pdfs.
 3. This is intended as a life-raft to researchers adrift in a sea of messy code. We will be focusing on *good-enough* software dev practises, not *best* practices, because...
 
@@ -64,6 +73,8 @@ md_intro_02="""
 - [Codespaces/devcontainer template repository](https://github.com/murphyqm/python-project-template)
 
 """
+
+st.write(md_intro_02)
 
 # st.set_page_config(layout="wide", page_title="DeReLiCT Code")
 
