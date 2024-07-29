@@ -37,11 +37,22 @@ md_intro_01="""
 3. This is intended as a life-raft to researchers adrift in a sea of messy code. We will be focusing on *good-enough* software dev practises, not *best* practices, because...
 
 ### Anything worth doing well, is worth doing poorly at first!
+
+Perfectionism is the enemy of progress, and a bunch of other clichés.
+
+- Sometimes online software development tutorials or articles assume you are starting from scratch in a completely new clean project, and don't give you any path to improve existing code;
+- Sometimes tutorials/articles assume *all you are doing is software dev* and don't recognised that this is being balanced against research;
+- Sometimes tutorials/articles are not tailored towards research project workflows.
+
+To try to fill this gap, this session will hopefully:
+- Introduce you to some practises/methods/tools that you can research further following the course;
+- Provide *both* some good-practise workflows for starting a new research project, *as well as* some useful tools and advice for grappling with a pre-existing project;
+- Instill the importance of good research computing practises, without overwhelming you to the point of sticking your head in the sand and avoiding it!
 """
 st.write(md_intro_01)
 
 
-
+st.header("Introduction presentation")
 components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vSV0N_UzZEqwzBTMn8QE-u3Fsqbeb1-GUOVu9_CWLE031orIUhaPo1xYgjhWuuypMf8L9129SZrB6gE/embed?start=false&loop=false&delayms=60000", height=450)
 
 md_intro_02="""
