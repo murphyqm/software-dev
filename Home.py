@@ -50,7 +50,7 @@ md_intro_01="""
 Perfectionism is the enemy of progress, and a bunch of other clichés.
 
 - Sometimes online software development tutorials or articles assume you are starting from scratch in a completely new clean project, and don't give you any path to improve existing code;
-- Sometimes tutorials/articles assume *all you are doing is software dev* and don't recognised that this is being balanced against research;
+- Sometimes tutorials/articles assume *all you are doing is software dev* and don't recognise that this is being balanced against other research work;
 - Sometimes tutorials/articles are not tailored towards research project workflows.
 
 To try to fill this gap, this session will hopefully:
