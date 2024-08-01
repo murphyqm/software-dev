@@ -22,7 +22,7 @@ st.header('Sustainable Software Development')
 
 md_intro="""
 *As part of the NFFDy 2024 Summer School, presented by Dr Maeve Murphy Quinlan.*  
-Access this page at **URL printed here**
+Access this page at **software-dev.streamlit.app**
 """
 
 md_quick_links = """
