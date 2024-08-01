@@ -146,6 +146,54 @@ pseudocode_md = """
 
 """
 
+testing_md = """
+### Using `pytest`
+
+The[`pytest`](https://docs.pytest.org/en/7.1.x/explanation/anatomy.html#test-anatomy) documentation suggests that each test has four parts:
+
+1. Arrange: you set the test up; you define variables/example data.
+2. Act: you run the functions you want to test.
+3. Assert: you check the answers to these functions are expected.
+4. Clean-up: you wipe the board clean and delete any variables or outputs.
+
+These tests will go into your `test` directory, in a Python file that begins with `test_`, and are essentially functions who's names also begin with `test_` - this means that `pytest` will be able to find and identify them as tests. Whew, the word "test" has almost lost meaning by now.
+
+In practise, a test might look like this:
+
+```python
+def test_example(self):
+    '''Test for the example function'''
+    
+    # Arrange
+    test_variable_1 = 0
+    test_variable_2 = 1
+    expected_output = 7
+
+    # Act
+    output = your_function(test_variable_1, test_variable_2)
+
+    # Assert
+    assert output == expected_output
+
+    # No cleanup needed
+```
+
+- You can use a basic assert statement to check if output is identical, eg. `assert one == 1`.
+- For floating point numbers of values where tolerance is required, you can use the `pytest.approx()` function -- see [documentation here](https://docs.pytest.org/en/latest/reference/reference.html#pytest.approx); remember that this will require an import statement like `from pytest import approx` at the beginning of your test script. You can define tolerance to suit your approach.
+- The `math` library also includes a `isclose()` function -- see [documentation here](https://docs.python.org/3/library/math.html#math.isclose).
+- The `numpy.testing` module contains many different assert statements for arrays -- see [documentation here](https://numpy.org/doc/stable/reference/routines.testing.html).
+
+> First, sketch pseudocode for your tests.
+> 
+> - If given a specific input, what specific output do you expect?
+> - What are some weird, edge cases that might trip your code up?
+> - How might you separate out code-testing vs. scientific validation?
+> - Are you matching integers with `==`, or will you have to include tolerances?
+> - Do you need to import any external libraries into your test script, like `pytest` or `numpy`?
+> 
+> Run your tests. Can you break your code so a test fails?
+"""
+
 st.subheader("3. Create a dev env")
 with st.expander("Create a conda environment for development"):
     st.write(dev_env_md)
@@ -176,6 +224,8 @@ st.subheader("4. Write Pseudocode and code")
 with st.expander("Use comments to draft your code"):
     st.write(pseudocode_md)
 st.subheader("5. Write test suite")
+with st.expander("Create a robust testing suite"):
+    st.write(testing_md)
 st.subheader("6. Write documentation")
 st.subheader("7. Build package with `pyproject.toml`")
 st.subheader("8. Build automated workflows")

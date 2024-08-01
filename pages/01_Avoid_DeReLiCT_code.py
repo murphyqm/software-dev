@@ -96,6 +96,45 @@ md_citation = """
 """
 
 md_testing = """
+### Write initial tests
+
+When we run through an example case, we are going to be using `pytest`, which is already installed in your `packaging-env`in your devcontainer. The[`pytest`](https://docs.pytest.org/en/7.1.x/explanation/anatomy.html#test-anatomy) documentation suggests that each test has four parts:
+
+1. Arrange: you set the test up; you define variables/example data.
+2. Act: you run the functions you want to test.
+3. Assert: you check the answers to these functions are expected.
+4. Clean-up: you wipe the board clean and delete any variables or outputs.
+
+These tests will go into your `test` directory, in a Python file that begins with `test_`, and are essentially functions who's names also begin with `test_` - this means that `pytest` will be able to find and identify them as tests. Whew, the word "test" has almost lost meaning by now.
+
+In practise, a test might look like this:
+
+```python
+def test_example(self):
+    '''Test for the example function'''
+    
+    # Arrange
+    test_variable_1 = 0
+    test_variable_2 = 1
+    expected_output = 7
+
+    # Act
+    output = your_function(test_variable_1, test_variable_2)
+
+    # Assert
+    assert output == expected_output
+
+    # No cleanup needed
+```
+
+You can see that testing in Python depends heavily on [assert statements](https://realpython.com/python-assert-statement/).
+
+- You can use a basic assert statement to check if output is identical, eg. `assert one == 1`.
+- For floating point numbers of values where tolerance is required, you can use the `pytest.approx()` function -- see [documentation here](https://docs.pytest.org/en/latest/reference/reference.html#pytest.approx); remember that this will require an import statement like `from pytest import approx` at the beginning of your test script. You can define tolerance to suit your approach.
+- The `math` library also includes a `isclose()` function -- see [documentation here](https://docs.python.org/3/library/math.html#math.isclose).
+- The `numpy.testing` module contains many different assert statements for arrays -- see [documentation here](https://numpy.org/doc/stable/reference/routines.testing.html).
+
+Once you've written your tests, you can run `pytest` from the conda env where it's installed, in the top-level directory (where your `src/` and `tests/` directories are). See details on [running `pytest` here](https://docs.pytest.org/en/7.1.x/how-to/usage.html#usage).
 
 """
 
@@ -119,4 +158,5 @@ with tab4:
     st.write(md_citation)
 
 with tab5:
+    components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vTJiN_hYC28QSikHJxGdjGXy67W1fpdIv_L9pHB0CASDCHEOssrKHSaBHvbYlqPRFhKnC3ziHExXddn/embed?start=false&loop=false&delayms=3000", height=450)
     st.write(md_testing)
