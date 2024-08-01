@@ -18,7 +18,11 @@ hide_default_format = """
        """
 st.markdown(hide_default_format, unsafe_allow_html=True)
 
-st.header('Sustainable Software Development')
+st.image("assets/cover_2.png")
+
+md_header="""
+#### Sustainable Software Development and Writing FAIR Research Code
+"""
 
 md_intro="""
 *As part of the NFFDy 2024 Summer School, presented by Dr Maeve Murphy Quinlan.*  
@@ -34,6 +38,8 @@ md_quick_links = """
 
 with st.sidebar:
     st.write(md_quick_links)
+
+# st.write(md_header)
 
 st.write(md_intro)
 

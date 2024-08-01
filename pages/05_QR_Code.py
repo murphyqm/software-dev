@@ -18,10 +18,10 @@ hide_default_format = """
        """
 st.markdown(hide_default_format, unsafe_allow_html=True)
 
-st.header('Sustainable Software Development')
+st.image("assets/cover_2.png")
 
 md_intro="""
-*As part of the NFFDy 2024 Summer School, presented by Dr Maeve Murphy Quinlan.*  
+*As part of the NFFDy 2024 Summer School*  
 
 #### Access this page at software-dev.streamlit.app or scan this:
 """
