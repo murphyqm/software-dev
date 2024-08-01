@@ -33,9 +33,9 @@ st.divider()
 gh_discussions="""
 
 
-#### GitHub Discussions
+### GitHub Discussions
 
-Access the GitHub Discussions board at [bit.ly/gh_discussions](https://bit.ly/gh_discussions) or scan this:
+#### Access the GitHub Discussions board at [bit.ly/gh_discussions](https://bit.ly/gh_discussions) or scan this:
 """
 st.write(gh_discussions)
 st.image("assets/gh_discussions.png")
