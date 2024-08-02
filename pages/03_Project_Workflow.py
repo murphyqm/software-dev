@@ -6,7 +6,7 @@ import altair as alt
 import matplotlib
 import re
 
-st.set_page_config( page_title="Project Workflow", page_icon="📈")
+st.set_page_config( page_title="Project Workflow", page_icon="🌟")
 st.write("If you're starting a new project, here's a workflow you can use",
          "to build a robust, tidy Python project.")
 st.write("Remember to use `git` to version control all your work.")

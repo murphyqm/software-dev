@@ -5,7 +5,7 @@ import numpy as np
 import altair as alt
 import matplotlib
 
-st.set_page_config(page_title="DeReLiCT Code", page_icon="📈")
+st.set_page_config(page_title="DeReLiCT Code", page_icon="🌺")
 
 hide_default_format = """
        <style>
@@ -136,6 +136,11 @@ You can see that testing in Python depends heavily on [assert statements](https:
 
 Once you've written your tests, you can run `pytest` from the conda env where it's installed, in the top-level directory (where your `src/` and `tests/` directories are). See details on [running `pytest` here](https://docs.pytest.org/en/7.1.x/how-to/usage.html#usage).
 
+## Testing for Machine Learning
+
+Machine learning testing can be complex due to the stochastic processes involved; however, good code writing practises and diligent unit testing can ensure that your code is behaving as intended.
+
+- [How to test ML code](https://medium.com/marvelous-mlops/how-to-test-ml-code-f9483829c72a#:~:text=Most%20ML%20codebases%20typically%20include,ensure%20they%20operate%20as%20intended.)
 """
 
 md_more = """

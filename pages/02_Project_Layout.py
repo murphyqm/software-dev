@@ -4,7 +4,7 @@ import numpy as np
 import altair as alt
 import matplotlib
 
-st.set_page_config( page_title="Project Layout", page_icon="📈")
+st.set_page_config( page_title="Project Layout", page_icon="🍃")
 
 hide_default_format = """
        <style>
