@@ -140,9 +140,12 @@ with tab3:
     md_alternatives = """
     Of course, this is just one way of organising your work.
 
-    You can use a tool like [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) to use a template to create your project structure; there arre many different scientific computing templates available.
+    Another option is to keep everything in the one repository, with your package in a `src/package_name` directory, and other scripts in a `analysis_scripts` directory in the same repository.
 
-    Regardless, it's a good idea to keep your code well-organised with an intentional, sensible structure.
+    You can also use a tool like [Cookiecutter](https://cookiecutter.readthedocs.io/en/stable/) to use a template to create your project structure; there are many different scientific computing templates available.
+
+    Regardless, it's a good idea to keep your code well-organised with an intentional, sensible structure. Pick a project organisation scheme because it's sensible and will help you write better code and do better research, not because you've just ended up with files in certain folders.
     """
+    st.write(md_alternatives)
 
 st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)
