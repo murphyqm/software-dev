@@ -143,6 +143,72 @@ This file will contain the exact versions of all your dependencies (including pi
 """
 
 pseudocode_md = """
+Pseudocode can look different for different people, and can include scribbling notes on a piece of paper, or saving text files in your repository. 
+
+Usually, I create my `.py` file where I plan on putting my code, and I use this to write my pseudocode as comments. Say I want to write a Python file with simple functions for calculating and converting diffusivity, heat capacity, density and conductivity; I might include notes like this:
+
+```python
+# Module with simple functions to convert between diffusivity,
+# heat capacity, density and conductivity
+# Reminder: Thermal diffusivity is the thermal conductivity divided
+# by density and specific heat capacity at constant pressure. 
+
+# Function to calculate diffusivity
+# Inputs/args: density, heat cap, pressure, conductivity
+# Outputs/returns: diffusivity
+
+# Function to calculate conductivity
+# Inputs/args: density, heat cap, pressure, diffusivity
+# Outputs/returns: conductivity
+
+# etc...
+```
+
+I might then start to flesh out how to do the calculation (note that this is more useful in more complex calculations, where there are multiple steps and the maths is less obvious):
+
+```python
+# Module with simple functions to convert between diffusivity,
+# heat capacity, density and conductivity
+# Reminder: Thermal diffusivity is the thermal conductivity divided
+# by density and specific heat capacity at constant pressure. 
+
+# Function to calculate diffusivity
+# Inputs/args: density, heat cap, conductivity
+# diff = cond / (heat_cap * density)
+# Outputs/returns: diffusivity
+
+# Function to calculate conductivity
+# Inputs/args: density, heat cap, diffusivity
+# cond = diff * heat_cap * density
+# Outputs/returns: conductivity
+
+# etc...
+```
+
+I then have a pretty straightforward blueprint to convert into actual Python code.
+
+```python
+# Module with simple functions to convert between diffusivity,
+# heat capacity, density and conductivity
+# Reminder: Thermal diffusivity is the thermal conductivity divided
+# by density and specific heat capacity at constant pressure. 
+
+# Function to calculate diffusivity
+# Inputs/args: density, heat cap, conductivity
+def diffusivity_calc(density, heat_cap, cond):
+    diff = cond / (heat_cap * density)
+    return diff
+# Outputs/returns: diffusivity
+
+# Function to calculate conductivity
+# Inputs/args: density, heat cap, diffusivity
+def conductivity_calc(density, heat_cap, diff):
+    cond = diff * heat_cap * density
+    return cond
+# Outputs/returns: conductivity
+
+# etc...
+```
 
 """
 
@@ -194,6 +260,29 @@ def test_example(self):
 > Run your tests. Can you break your code so a test fails?
 """
 
+docs_md = """
+Like everything in Python, there are multiple different ways of doing things, and multiple different formats that documentation can be written in.
+
+1. Write a useful README file with information on the name and aim of the project, the authors, installation instructions, and a basic example of how to use the code.
+2. Write docstrings for your functions...
+    - You can use an IDE plugin like Autodocstring to build a docstring tempalte for your function
+    - Read the [official docstring guidance here](https://peps.python.org/pep-0257/)
+    - Follow one of the official layout guides such as [Google](https://google.github.io/styleguide/pyguide.html) or [NumPy](https://numpydoc.readthedocs.io/en/latest/format.html)
+3. You can also build a documentation website on GitHub pages using [mkdocs](https://arctraining.github.io/swd3-notes/session3/); this will automatically pull the information you have provided in your docstrings to create an API reference.
+"""
+
+toml_1_md = """
+In order to generate a quick tempalte toml file, fill in the following details:
+"""
+
+toml_2_md ="""
+This file contains metadata about your project, such as the name, version, and author. It also specifies the required Python version and any dependencies your project may have. You might need to add to this, or change/add dependencies. We have added a specific version of `numpy` and `pytest` to demonstrate the syntax. You can find more information about the `pyproject.toml` file [here](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html).
+""" 
+packaging_md = """
+
+
+"""
+
 st.subheader("3. Create a dev env")
 with st.expander("Create a conda environment for development"):
     st.write(dev_env_md)
@@ -227,7 +316,48 @@ st.subheader("5. Write test suite")
 with st.expander("Create a robust testing suite"):
     st.write(testing_md)
 st.subheader("6. Write documentation")
+with st.expander("Useful documentation is both human and machine readable"):
+    st.write(docs_md)
 st.subheader("7. Build package with `pyproject.toml`")
+with st.expander("Use this pregenerated template"):
+    st.write(toml_1_md)
+    project_name_new = st.text_input(f"Enter the project name if {project_name} doesn't look correct:", project_name)
+    author_name = st.text_input("Enter the author's full name:", "Author Full Name")
+
+    author_email = st.text_input("Enter the author's email:", "authors_email@goes_here.ie")
+
+    version = st.text_input("Enter the package version:", "0.1.0")
+
+    description = st.text_input("Enter a very brief project description:", "A simple Python project")
+
+    toml_snippet = f"""
+    [build-system]
+    requires = ["setuptools>=61.0", "setuptools-scm"]
+    build-backend = "setuptools.build_meta"
+
+    [project]
+    name = "{project_name_new}"
+    description = "{description}"
+    version = "0.0.1"
+    readme = "README.md"
+    authors = [
+    {{ name="{author_name}", email="{author_email}" }},
+    ]
+    requires-python = ">=3.10"
+    classifiers = [
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ]
+    dependencies = [
+        "numpy>=1.21.2",
+    ]
+    """
+    st.code(toml_snippet, language='toml')
+    st.write(toml_2_md)
+
+with st.expander("Create a `pip` installable package"):
+    st.write(packaging_md)
 st.subheader("8. Build automated workflows")
 st.subheader("9. Export/record dev env/dependencies")
 st.subheader("10. Create a release on GitHub, with a DOI")

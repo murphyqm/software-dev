@@ -178,7 +178,7 @@ Do not include argument flags like `"testing"` to alter the behaviour of your fu
 - [How to unit test machine learning code](https://thenerdstation.medium.com/how-to-unit-test-machine-learning-code-57cf6fd81765)
 - [How to test ML code](https://medium.com/marvelous-mlops/how-to-test-ml-code-f9483829c72a#:~:text=Most%20ML%20codebases%20typically%20include,ensure%20they%20operate%20as%20intended.)
 
-## Remember that testing is essential and your code *is not scientific* if you do not test it
+## Remember that testing is essential and your code *is not scientific* if you do not test
 """
 
 md_more = """
