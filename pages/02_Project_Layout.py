@@ -16,7 +16,7 @@ st.markdown(hide_default_format, unsafe_allow_html=True)
 
 st.title('Project layout and organisation')
 
-st.write("Before we dig deeper into each of the **DeReLiCT** headings, let's first look at one way of organising your work.")
+st.write("Having had a dig into each of the **DeReLiCT** headings, let's now look at one way of organising your work.")
 
 md_layout_01 = """
 - One thing that always confused me was the best way to keep all my work tidy
