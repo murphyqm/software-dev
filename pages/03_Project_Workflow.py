@@ -272,11 +272,11 @@ Like everything in Python, there are multiple different ways of doing things, an
 """
 
 toml_1_md = """
-In order to generate a quick tempalte toml file, fill in the following details:
+In order to generate a quick template toml file, fill in the following details:
 """
 
 toml_2_md ="""
-This file contains metadata about your project, such as the name, version, and author. It also specifies the required Python version and any dependencies your project may have. You might need to add to this, or change/add dependencies. We have added a specific version of `numpy` and `pytest` to demonstrate the syntax. You can find more information about the `pyproject.toml` file [here](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html).
+This file contains metadata about your project, such as the name, version, and author. It also specifies the required Python version and any dependencies your project may have. You might need to add to this, or change/add dependencies. We have added a specific version of `numpy` to demonstrate the syntax; please delete this is not needed. You can find more information about the `pyproject.toml` file [here](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html).
 """ 
 packaging_md = """
 
@@ -329,6 +329,7 @@ with st.expander("Use this pregenerated template"):
     version = st.text_input("Enter the package version:", "0.1.0")
 
     description = st.text_input("Enter a very brief project description:", "A simple Python project")
+    st.write("You can now copy and paste this into your `pyproject.toml` file:")
 
     toml_snippet = f"""
     [build-system]
