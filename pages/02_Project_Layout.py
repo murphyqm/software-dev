@@ -144,3 +144,5 @@ with tab3:
 
     Regardless, it's a good idea to keep your code well-organised with an intentional, sensible structure.
     """
+
+st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)

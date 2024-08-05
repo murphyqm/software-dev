@@ -144,7 +144,9 @@ Machine learning testing can be complex due to the stochastic processes involved
 """
 
 md_more = """
+Please see our lecture material for [SWD3: Software Development Practises in Python](https://arctraining.github.io/swd3-notes/) for more information.
 
+See also [FAIR Software](https://fair-software.nl/about/) for a slightly different approach to applying the FAIR principles to your code.
 """
 
 with tab1:
@@ -167,3 +169,8 @@ with tab4:
 with tab5:
     components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vTJiN_hYC28QSikHJxGdjGXy67W1fpdIv_L9pHB0CASDCHEOssrKHSaBHvbYlqPRFhKnC3ziHExXddn/embed?start=false&loop=false&delayms=3000", height=450)
     st.write(md_testing)
+
+with tab6:
+    st.write(md_more)
+
+st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)

@@ -408,3 +408,5 @@ with tab6:
     st.write("If you are interested in learning more, I recommend [this Turing Institute training in Python](https://alan-turing-institute.github.io/rse-course/html/index.html)",
              "on research software engineering.")
     st.write("This page will be updated with the current most relevant or useful courses.")
+
+st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)

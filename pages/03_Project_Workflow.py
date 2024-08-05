@@ -238,3 +238,5 @@ st.subheader("12. Create a research env with the new package")
 st.subheader("13. Do analysis/research work")
 st.subheader("14. Export/record research env")
 st.subheader("15. Create release with DOI")
+
+st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)

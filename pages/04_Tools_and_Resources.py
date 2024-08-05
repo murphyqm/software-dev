@@ -59,3 +59,5 @@ st.write(md_repro, unsafe_allow_html=True)
 st.header("References related to publishing your code")
 
 st.write(md_publishing, unsafe_allow_html=True)
+
+st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)

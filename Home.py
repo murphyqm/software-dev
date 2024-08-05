@@ -48,7 +48,7 @@ st.subheader("Tutorial format")
 md_intro_01="""
 1. This is an interactive session, but we only have two hours so will be moving pretty quickly...
     - I will run through some live coding/project set-up and tools, but will let you run through the content yourself afterwards
-2. This webapp will stay live; however, I may update it and change the content going forward. Please `fork` your own copy on GitHub to snapshot it, and feel free to download the presentation pdfs.
+2. This webapp will stay live; however, I may update it and change the content going forward. Since it is on GitHub, you will be able to find older versions and can `fork` your own copy to snapshot it. Feel free to download the presentation pdfs.
 3. This is intended as a life-raft to researchers adrift in a sea of messy code. We will be focusing on *good-enough* software dev practises, not *best* practices, because...
 
 ### Anything worth doing well, is worth doing poorly at first!
@@ -486,3 +486,5 @@ st.write(md_intro_02)
 #     st.write("If you are interested in learning more, I recommend [this Turing Institute training in Python](https://alan-turing-institute.github.io/rse-course/html/index.html)",
 #              "on research software engineering.")
 #     st.write("This page will be updated with the current most relevant or useful courses.")
+
+st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)

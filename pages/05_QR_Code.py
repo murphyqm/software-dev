@@ -39,3 +39,6 @@ gh_discussions="""
 """
 st.write(gh_discussions)
 st.image("assets/gh_discussions.png")
+
+
+st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)
