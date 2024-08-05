@@ -586,7 +586,6 @@ dependencies:
     - "mkdocstrings[python]"
     - mkdocs-material
     """
-
     st.code(mkdocs_package, language="yaml")
 st.subheader("7. Build package with `pyproject.toml`")
 with st.expander("Create a `pip` installable package"):
@@ -594,14 +593,60 @@ with st.expander("Create a `pip` installable package"):
 st.subheader("8. Build automated workflows")
 with st.expander("Work smarter, not harder"):
     st.write(automated_md)
+
+record_deps = """
+While you want your package dependencies to be loose to allow for flexible use with other packages, you also want a record of your exact environment before we create a build, including every dependency and version. This can be done using the `export` command (changing `env-record.yml` to a filename of your choosing):
+
+```bash
+conda env export > env-record.yml
+```
+
+This file will contain the exact versions of all your dependencies (including pip dependencies, and build information) which is a useful record, but isn't user-friendly when it comes to rebuilding/reproducing an environment. See the notes above (under "create a dev env") on environment files and distributing code to see alternative export methods.
+"""
 st.subheader("9. Export/record dev env/dependencies")
+with st.expander("Record exact versions of packages used for reproducibility and transparency"):
+    st.write(record_deps)
 st.subheader("10. Create a release on GitHub, with a DOI")
+with st.expander("Ensure your Zenodo/GitHub Integration is set up"):
+    st.write("Creating a release on GitHub is as easy as clicking 'Draft new release'",
+             "from your repository release page.",
+             "If you haven't already, build a [CFF file](https://citation-file-format.github.io/) in your repository for easy citation",
+             "(and to automatically pull in your project's metadata). ")
 st.divider()
 st.header("Part Two: using the package for research")
 st.subheader("11. Create project repository and directory structure")
+st.write("See our Project Layout page for some ideas on how to organise this.")
 st.subheader("12. Create a research env with the new package")
+st.write("You can create an environment in your preferred package manager; and pip install your package:")
+st.code("python -m pip install https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/download/YOUR-VERSION-NAME/PACKAGENAME-VERSION.tar.gz")
+st.write("You can also build a conda env from a file (`environment.yml`):")
+my_env_md = """
+name: my-research-env
+
+dependencies:
+# Whatever packages you need for your project
+  - python=3.12
+  - numpy
+  - matplotlib
+  - pandas
+  - pip
+  - pip:
+    - https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/download/YOUR-VERSION-NAME/PACKAGENAME-VERSION.tar.gz
+"""
+st.code(my_env_md)
+st.write("You can then build the package:")
+
+st.code("conda env create --file environment.yml")
+
 st.subheader("13. Do analysis/research work")
+st.write("Easy as that!")
+st.write("You may bounce back and forth, adding new features to your package and creating a new release,",
+         "and then updating your package in your research environment.")
 st.subheader("14. Export/record research env")
+st.write("You can follow the exact same steps detailed for your development environment above.")
 st.subheader("15. Create release with DOI")
+st.write("Again, you'll want to authorise Zenodo for this repository.",
+         "The main difference between a release here vs. in your package repository",
+         "is that there are no build files to include in this release.")
 
 st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)
