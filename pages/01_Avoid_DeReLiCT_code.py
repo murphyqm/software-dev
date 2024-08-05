@@ -140,7 +140,45 @@ Once you've written your tests, you can run `pytest` from the conda env where it
 
 Machine learning testing can be complex due to the stochastic processes involved; however, good code writing practises and diligent unit testing can ensure that your code is behaving as intended.
 
+### Make your code modular and break it into small functions
+
+Making sure your code is made up of small simple functions that fit together in a modular way makes it far easier to write unit tests, and seaprates out any training/ML algorithms from easier-to-test code.
+
+### Build unit tests for all your functions
+
+In addition to your actual machine learning algorithms, you will presumably have multiple preprocessing and data cleaning stages, and other calculations before you train a model. Ensure that all these stages are covered by your unit testing suite. 
+
+### Test your modelling functions
+
+You should test that your modelling function produces the correct coefficients. In [this tutorial](https://medium.com/@ydmarinb/simplifying-unit-testing-in-machine-learning-with-python-df9b9c1a3300#:~:text=Unit%20tests%20are%20small%20tests,processing%20to%20model%20performance%20evaluation.), the author uses the `assert` statement in conjunction with the `hasattr` function to check that the model has actually been trained:
+
+```python
+def test_model_training():
+    X, y = make_classification(n_samples=100, n_features=2, random_state=42)
+    model = LogisticRegression(random_state=42)
+    model.fit(X, y)
+    assert hasattr(model, "coef_"), "The model should have attributes after training"
+```
+### Integration tests and example outputs
+
+It's important to test that your model outputs results within specified bounds. This can be done by creating an example or model dataset that is expected when the model is trained with certain parameters and input data. Depending on your model, the example output may be coefficients or an entire data array (possibly saved as a csv file) that you are confident in: the results make scientific sense, compare favourable to existing analytical or numerical models, or are within a certain error envelope of a known result.
+
+As machine learning algorithms usually produce a similar but non-identical output, you can set up your test in a number of ways to allow comparison of slightly differing results:
+- Fix the random seed (if applicable) to allow for closer comparison;
+- Use libraries such as `numpy.testing` to compare numbers and arrays with specified tolerances;
+- Use post-processing functions in your library/package/workflow that reduce the data down to certain derived values to compare to example saved values (also ensure these post-processing functions have unit tests).
+
+### Test your code as it will be used
+
+Do not include argument flags like `"testing"` to alter the behaviour of your functions when running tests; this can lead to problematic behaviour being missed by your testing suite. If you feel you *must* do this in order to run your tests, you instead need to rewrite and reorganise your code so that robust and accurate tests can be run.
+
+#### Further information and resources
+
+- [Simplifying Unit Testing in Machine Learning with Python](https://medium.com/@ydmarinb/simplifying-unit-testing-in-machine-learning-with-python-df9b9c1a3300#:~:text=Unit%20tests%20are%20small%20tests,processing%20to%20model%20performance%20evaluation.)
+- [How to unit test machine learning code](https://thenerdstation.medium.com/how-to-unit-test-machine-learning-code-57cf6fd81765)
 - [How to test ML code](https://medium.com/marvelous-mlops/how-to-test-ml-code-f9483829c72a#:~:text=Most%20ML%20codebases%20typically%20include,ensure%20they%20operate%20as%20intended.)
+
+## Remember that testing is essential and your code *is not scientific* if you do not test it
 """
 
 md_more = """
