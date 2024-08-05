@@ -157,9 +157,11 @@ with tab2:
     st.write(md_repository)
 
 with tab3:
+    components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vQMdFqBQHJcOu0RTJgbB2XR2lm-tfyFZp8DkMePASLAqKoHxoPrZto-yH08fpni3xnNBlr3RsvH0sHs/embed?start=false&loop=false&delayms=3000", height=450)
     st.write(md_license)
 
 with tab4:
+    components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vR5otqepCmH9BMwvglLRBW_X-CF_C4bJ-40lGPROcwdFSBPBoNaO950ZRHClsLXvOWOmLMitMx05EJI/embed?start=false&loop=false&delayms=3000", height=450)
     st.write(md_citation)
 
 with tab5:
