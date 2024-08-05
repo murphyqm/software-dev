@@ -279,7 +279,182 @@ toml_2_md ="""
 This file contains metadata about your project, such as the name, version, and author. It also specifies the required Python version and any dependencies your project may have. You might need to add to this, or change/add dependencies. We have added a specific version of `numpy` to demonstrate the syntax; please delete this is not needed. You can find more information about the `pyproject.toml` file [here](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html).
 """ 
 packaging_md = """
+Because you have a `pyproject.toml` file and a well-organised directory structure, you can build your Python package. This means you can created pre-compiled binaries for your project.
 
+Create a new environment from the terminal called build-env:
+
+```bash
+conda create --name build-env python=3.12
+```
+
+Activate the new environment:
+```bash
+conda activate build-env
+```
+
+Install `build` with `pip`:
+```bash
+python3 -m pip install --upgrade build
+```
+
+Then to create a `dist` folder with the installable `tar.gz` and `whl` files run build:
+```bash
+python3 -m build
+```
+
+When you create a new release on GitHub, you can upload these files to allow people to `pip install` using the release url (see example workflow below).
+
+To install the package locally and test it, you can use `pip`:
+```bash
+python3 -m pip install --editable . # to install an editable version that will update when you change the source code
+
+python3 -m pip install . # to install in non-editable format
+```
+
+You can then open Python and try importing your package and seeing if it works!
+
+### Manual binary upload in a GitHub release
+
+One possible workflow for generating a release for your code that includes installable binaries is detailed below.
+
+1. Test your code locally using `pytest` and check that your docs build and are up to date.
+2. Do a local install with `python3 -m pip install .` and try loading your package to check that it works.
+3. Build your package locally with `python3 -m build`.
+4. Push all your changes to the main branch (the `dist` and `build` files won't be included because of the `.gitignore` file).
+5. Create a new release on your latest commit, and use the section *Attach binaries by dropping them here or selecting them* to upload both zipped files in the `dist` folder. Upload these individually instead of uploading the `dist` folder.
+6. Once your release is published, you can point people to install your package with the following snippet (with the URL updated to the URL of your `tar.gz` file associated with the release):
+
+        python -m pip install https://github.com/YOUR-USERNAME/YOUR-REPO-NAME/releases/download/YOUR-VERSION-NAME/PACKAGENAME-VERSION.tar.gz
+
+But it would be nice if we could do this a little more automatically...
+"""
+
+automated_md = """
+## Basic testing workflow
+
+First, let's set up an automated testing suite using one of GitHub's Workflow Templates:
+
+1. From your repository main page, select the "Actions" tab in the top banner.
+2. Select "New Workflow".
+3. Search for "Python application" and select *Configure* for the action called *Python application* (note: after the course, have a look through the "Python package" workflow and see what's different).
+4. Read through the action file; it should work as-is. One small change for convience is under this section:
+
+        on:
+            push:
+                branches: [ "main" ]
+            pull_request:
+                branches: [ "main" ]
+
+    add the line:
+
+        on:
+            push:
+                branches: [ "main" ]
+            pull_request:
+                branches: [ "main" ]
+            workflow_dispatch:
+    
+    This will allow you to manually run the action which can be very useful!
+
+## Packaging workflow
+
+Another workflow that I frequently use is this build and packaging workflow:
+
+```yml
+# This workflow will install python dependencies and build the package
+# It will then add the binaries to a specified release
+# This action does not run automatically
+
+name: Build package and release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        pytest
+    - name: Install pypa/build
+      run: >-
+        python3 -m
+        pip install
+        build
+        --user
+    - name: Build a binary wheel and a source tarball
+      run: python3 -m build --sdist --wheel --outdir dist/
+    - name: Release with Notes
+      uses: softprops/action-gh-release@v2
+      with:
+        files: dist/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+To use this workflow, you need to create a GitHub release; then manually run with workflow. You will be asked to pick the commit to run the workflow on: select your recently created release tag. This will add your Python `whl` and `tar.gz` to the release (instead of you manually having to build and upload these as detailed before).
+
+## Documentation workflow
+
+The steps to build your docs shown above require you to run `TZ=UTC mkdocs gh-deploy` after you make changes to your documentation. You might instead want to edit locally, test that the website looks correct using the `serve` option, and then deploy the website online only when changes are merged into the main branch. You can add the following workflow `yml` file to the folder `.github/workflows` in order to do this:
+
+``` yaml
+# Workflow to automatically deploy mkdocs website when changes are pushed to main
+name: mkdocs-action
+on:
+  push:
+    branches:
+      - main  # the workflow will run when you push changes to the main branch
+  workflow_dispatch:  # you can also manually trigger the workflow for a different branch
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # the action runs on a virtual ubuntu machine
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Git Credentials  # this figures out the permissions
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install \  # install any required mkdocs packages or plugins
+              mkdocs-material \
+              mkdocs  # you will have to add additional packages if you pip installed any extra features
+      - run: mkdocs gh-deploy --force  # make mkdocs deploy even if there already exists content on the gh-pages branch
+```
 
 """
 
@@ -318,10 +493,9 @@ with st.expander("Create a robust testing suite"):
 st.subheader("6. Write documentation")
 with st.expander("Useful documentation is both human and machine readable"):
     st.write(docs_md)
-st.subheader("7. Build package with `pyproject.toml`")
-with st.expander("Use this pregenerated template"):
+with st.expander("Use this pregenerated template to create a `pyproject.toml` file"):
     st.write(toml_1_md)
-    project_name_new = st.text_input(f"Enter the project name if {project_name} doesn't look correct:", project_name)
+    project_name_new = st.text_input(f"Enter the project name if `{project_name}` doesn't look correct:", project_name)
     author_name = st.text_input("Enter the author's full name:", "Author Full Name")
 
     author_email = st.text_input("Enter the author's email:", "authors_email@goes_here.ie")
@@ -356,10 +530,70 @@ with st.expander("Use this pregenerated template"):
     """
     st.code(toml_snippet, language='toml')
     st.write(toml_2_md)
+with st.expander("Using `mkdocs` to create a docs website"):
+    st.write("[Mkdocs](https://www.mkdocs.org/) is a simple and quick documentation building library that works well with GitHub and GitHub pages.")
 
+    st.write("From the project folder (which holds you `pyproject.toml` file - note: you may want to build this file first then come back), from an environment with `mkdocs` and the required extra libraries installed",
+    "(see the suggested env yml at the bottom of the page to install `mkdocs` and the required extensions), you can quickly set up your docs:")
+    st.code("mkdocs new .", language="bash")
+    st.write("This will both create a `docs/` folder, and a `mkdocs.yml` file. Add the following to the `mkdocs.yml` file:")
+
+    mkdocs_snippet = f"""
+    site_name: {project_name} Documentation
+
+theme:
+  name: "material"
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [src]  # search packages in the src folder
+
+nav:
+  - Index: index.md
+    """
+    st.code(mkdocs_snippet, language='yaml')
+    st.write("Then, within the `docs/` folder, you can edit the file `index.md` (or add additional markdown files), and add the following snippets:")
+
+    st.code(f"::: {project_name}")
+
+    st.write(f"This will include any documentation you have added to the `__init__.py` file in your `src/{project_name}/` folder.")
+
+    st.write("You can include your API reference by including the following snippet (updating `source` with whatever your python file in your package is called):")
+
+    st.code(f"::: {project_name}.source")
+
+    st.write("To preview your documentation, just run `TZ=UTC mkdocs serve` from the directory that contains the `mkdocs.yml`.",
+    "The `TZ=UTC` command is due to a timezone bug that causes the build to fail if not included.",
+    "When happy with your documentation, you can run `TZ=UTC mkdocs build` to create a folder of webpages, then `TZ=UTC mkdocs gh-deploy`",
+    "to publish these docs to GitHub. Note that you will have to enable GitHub pages, and provide actions with write permissions on your repository.",
+    "For more information, see [the wiki post here](https://github.com/murphyqm/python-project-template/wiki/mkdocs-workfow).")
+
+
+    st.subheader("Mkdocs env")
+    st.write("You can use the following env yml to install the required `mkdocs` packages to build the docs example above.")
+
+    mkdocs_package = """
+    name: mkdocs-env
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+    - mkdocs
+    - "mkdocstrings[python]"
+    - mkdocs-material
+    """
+
+    st.code(mkdocs_package, language="yaml")
+st.subheader("7. Build package with `pyproject.toml`")
 with st.expander("Create a `pip` installable package"):
     st.write(packaging_md)
 st.subheader("8. Build automated workflows")
+with st.expander("Work smarter, not harder"):
+    st.write(automated_md)
 st.subheader("9. Export/record dev env/dependencies")
 st.subheader("10. Create a release on GitHub, with a DOI")
 st.divider()
