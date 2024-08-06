@@ -29,15 +29,6 @@ md_intro="""
 Access this page at **software-dev.streamlit.app**
 """
 
-md_quick_links = """
-## Useful links
-
-- Python Project Template (GitHub): [bit.ly/python-template](https://bit.ly/python-template)
-- GitHub Discussions (for polls etc.): [bit.ly/gh_discussions](https://bit.ly/gh_discussions)
-"""
-
-with st.sidebar:
-    st.write(md_quick_links)
 
 # st.write(md_header)
 
@@ -488,3 +479,14 @@ st.write(md_intro_02)
 #     st.write("This page will be updated with the current most relevant or useful courses.")
 
 st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)
+
+
+md_quick_links = """
+## Useful links
+
+- Python Project Template (GitHub): [bit.ly/python-template](https://bit.ly/python-template)
+- GitHub Discussions (for polls etc.): [bit.ly/gh_discussions](https://bit.ly/gh_discussions)
+"""
+
+with st.sidebar:
+    st.write(md_quick_links)

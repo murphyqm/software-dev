@@ -49,6 +49,7 @@ with st.expander("What does your code need to do?"):
     st.write(brainstorm_md)
 st.subheader("2. Create package repository and directory structure")
 with st.expander("Use a basic Python package template"):
+    st.write("You can use the Python Project Template (GitHub): [bit.ly/python-template](https://bit.ly/python-template)")
     st.write("##### 1. Choose your package/repository name")
     project_name = st.text_input("Enter your package name (lowercase letters and underscores only!):", "example_package")
     project_name = re.sub('\s+', '_', project_name)
@@ -650,3 +651,14 @@ st.write("Again, you'll want to authorise Zenodo for this repository.",
          "is that there are no build files to include in this release.")
 
 st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)
+
+
+md_quick_links = """
+## Useful links
+
+- Python Project Template (GitHub): [bit.ly/python-template](https://bit.ly/python-template)
+- GitHub Discussions (for polls etc.): [bit.ly/gh_discussions](https://bit.ly/gh_discussions)
+"""
+
+with st.sidebar:
+    st.write(md_quick_links)
