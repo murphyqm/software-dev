@@ -21,6 +21,10 @@ identifiers:
   - type: url
     value: 'https://github.com/murphyqm/software-dev'
     description: GitHub Repository
+  - type: doi
+    value: 'https://doi.org/10.5281/zenodo.13868947'
+    description: Zenodo archive
+
 repository-code: 'https://github.com/murphyqm/software-dev'
 url: 'https://software-dev.streamlit.app/'
 abstract: >
@@ -34,6 +38,6 @@ keywords:
   - git
   - software development
 license: MIT
-commit: 'c2d54af '
-version: v0.1.0
+commit: '7a0b5c0'
+version: v1.0.0
 date-released: '2024-10-01'
