@@ -1,6 +1,6 @@
 # Sustainable Software Development webapp
 
-[![DOI](https://zenodo.org/badge/833194028.svg)](https://doi.org/10.5281/zenodo.13866810)
+[![DOI](https://zenodo.org/badge/833194028.svg)](https://doi.org/10.5281/zenodo.13868947)
 
 This GitHub repository contains contents for an introductory course on software development, 
 including interactive exercises, pdf slides, and links to GitHub codespace templates. This app
