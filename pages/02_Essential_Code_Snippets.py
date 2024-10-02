@@ -52,7 +52,7 @@ st.markdown("""
 
 st.write(font_css, unsafe_allow_html=True)
 
-tablist = ["\u2001  **bash**  \u2001", "\u2001 **Conda** \u2001", "\u2001 **git** \u2001", "\u2001 **mkdocs** \u2001", ]
+tablist = ["\u2001  **bash**  \u2001", "\u2001 **Conda** \u2001", "\u2001 **git** \u2001", "\u2001 **docs** \u2001", ]
 
 
 
@@ -70,7 +70,6 @@ will be running on Ubuntu, a Linux distribution.
 Linux commands.
 - Mac commands are Unix-based and so very similar.
 
-Use Codespaces as a playground to get familiar with Linux/bash commands.
 
 ```bash
 cd # change directory to home
@@ -777,6 +776,25 @@ esac
 ```
 """
 
+bash_3 = """
+We are going to use [GitHub Codespaces](https://github.com/features/codespaces)
+as a remote development environment. While setting up the Codespace virtual machine,
+we will be using a [devcontainer](https://containers.dev/) to install some extensions
+and packages that you'll use.
+
+What all of that means is that there's nothing for you to install.
+Head over to the [Python project template](https://github.com/ARCTraining/python-project-template)
+and log in with your GitHub account which you set up before attending the course. Click the green 
+**Use this template**
+button and select **Create a new repository**. If you're logged in,
+you should now get a prompt that asks you for a name. If you're note logged in,
+please log in or sign up using your University of Leeds email!
+
+ ![Screenshot of GitHub repository, highlighting the "Use this template" button.](https://docs.github.com/assets/cb-76823/images/help/repository/use-this-template-button.png)
+
+Use Codespaces as a playground to get familiar with Linux/bash commands.
+"""
+
 # Conda commands
 
 conda_md = """
@@ -799,9 +817,15 @@ conda env export --no-builds > exported-env.yml # exports all packages in the en
 conda env export --from-history  > exported-env.yml # exports the packages that were explicitly installed
 ```
 
-We will look at exporting conda envs in more detail in the [Project Workflow](Project_Workflow#9-export-record-dev-env-dependencies) section.
+We will look at exporting conda envs in more detail in the
+[Project Workflow](Project_Workflow#9-export-record-dev-env-dependencies) section, but
+for now, let's look at some of the [basic commands here](https://arctraining.github.io/swd3-dev/sections/package-manager.html#environment-conda-example).
+Again, let's use the codespaces virtual machine as a sanbox to practise building (and breaking!)
+environments.
 
-Conda is just one of the many options available to manage Python packages and dependencies, however it is very widely used in scientific research. See this [cheat-sheet](https://www.datacamp.com/cheat-sheet/conda-cheat-sheet) for other commonly used commands.
+Conda is just one of the many options available to manage Python packages and dependencies,
+however it is very widely used in scientific research.
+See this [cheat-sheet](https://www.datacamp.com/cheat-sheet/conda-cheat-sheet) for other commonly used commands.
 """
 
 # git basics
@@ -813,6 +837,8 @@ We will use git and a GitHub remote repository to track our changes. You can use
 the codespaces virtual machine in
  the same way you would from your local machine.
 
+But first, [what is git and version control?](https://arctraining.github.io/swd3-dev/sections/git.html).
+
 ```bash
 git status # check on status of current git repo
 git branch NAME # create a branch called NAME
@@ -822,6 +848,9 @@ git commit # commit the staged files (this will open your text editor to create 
 git push origin NAME # push local commits to the remote branch tracking the branch NAME
 ```
 
+Let's try some [basic git commands](https://arctraining.github.io/swd3-notes/session1/) in our virtual
+machine.
+
 ### Visualising Git history
 
 The VSCode plugin "GitGraph" is very useful; this is added by default to the codespaces
@@ -829,6 +858,32 @@ virtual machine but also can be added to your local VSCode installation.
 """
 
 #mkdocs basics
+
+docs_basics = '''
+# Writing docs for your code
+
+Good documentation in your code will act like helpful comments
+for human users (helping to explain the code and how it works),
+but will *also* be machine-readable and can help to generate
+documentation webpages.
+
+A basic docstring in a function will look something like this:
+
+```python
+def function_name(arg1: type, arg2: type) -> return_type:
+    """One line summary
+
+    More detail on the function, with a blank line between the one-
+    line summary and this more in-depth text.
+    """
+
+    # After another blank line, continue code
+    return something
+```
+
+See this in-depth tutorial [for more information on writing documentation](https://realpython.com/documenting-python-code/).
+
+'''
 
 mkdocs_md = """
 ## Essential mkdocs commands
@@ -884,6 +939,8 @@ To include function-level documentation, just include:
 For more detail on customising your `mkdocs` set-up and on writing good documentation, please see this [fantastic RealPython tutorial](https://realpython.com/python-project-documentation-with-mkdocs/).
 """
 
+# tests snippets
+
 
 
 with tab1:
@@ -891,6 +948,7 @@ with tab1:
     st.write(bash_md)
     with st.expander("Click here for a full cheat-sheet"):
         st.markdown(bash_2)
+    st.markdown(bash_3)
 
 with tab2:
 
@@ -901,6 +959,7 @@ with tab3:
     st.write(git_md)
 
 with tab4:
+    st.write(docs_basics)
 
     st.write(mkdocs_md)
 
