@@ -5,7 +5,7 @@ import numpy as np
 import altair as alt
 import matplotlib
 
-st.set_page_config(page_title="DeReLiCT Code", page_icon="🌺")
+st.set_page_config(page_title="Essential Code Snippets", page_icon="🌺")
 
 hide_default_format = """
        <style>
@@ -52,11 +52,11 @@ st.markdown("""
 
 st.write(font_css, unsafe_allow_html=True)
 
-tablist = ["\u2001  **bash**  \u2001", "\u2001 **Conda** \u2001", "\u2001 **git** \u2001", "\u2001 **docs** \u2001", ]
+tablist = ["\u2001  **bash**  \u2001", "\u2001 **conda** \u2001", "\u2001 **git** \u2001", "\u2001 **docs** \u2001", "\u2001 **tests** \u2001",]
 
 
 
-tab1, tab2, tab3, tab4 = st.tabs(tablist)
+tab1, tab2, tab3, tab4, tab5 = st.tabs(tablist)
 
 # Linux Commands
 
@@ -875,7 +875,7 @@ Please don't *only* store your code in notebooks.
 #mkdocs basics
 
 docs_basics = '''
-# Writing docs for your code
+## Writing docs for your code
 
 Good documentation in your code will act like helpful comments
 for human users (helping to explain the code and how it works),
@@ -1165,7 +1165,53 @@ nav:
 ```
 """
 
+# test basics
 
+test_markdown = """
+
+### No tests = not science
+
+A bold statement! But code that does not have tests is straightforwardly
+not following the scientific method. You **must** test your code.
+
+We saw in the section on applying **DeReLiCT** to your code how to design tests
+([see here](Avoid_DeReLiCT_code#write-initial-tests)), but for quick reference here is a template you can use to build your tests:
+
+```python
+def test_example(self):
+    '''Test for the example function'''
+
+    # Arrange
+    test_variable_1 = 
+    test_variable_2 = 
+    expected_output = 
+
+    # Act
+    output = your_function(test_variable_1, test_variable_2)
+
+    # Assert
+    assert output == expected_output
+
+    # Cleanup
+```
+
+In your tests directory, remember to include a file called 
+`__init__.py` file in your `tests/` directory, containing
+the following:
+
+```python
+import sys
+
+sys.path.append("src")
+```
+
+To run your tests, simply call `pytest` from the project
+directory.
+
+This [RealPython testin tutorial](https://realpython.com/python-testing/)
+contains a lot more information for you to dig into this topic in more depth.
+
+"""
 
 with tab1:
     
@@ -1189,6 +1235,8 @@ with tab4:
     with st.expander("Click here to see an example detailed yml file"):
         st.write(mkdocs_code)
 
+with tab5:
+    st.write(test_markdown)
 
 
 st.markdown('<p style="text-align: center;">Copyright © 2024 Maeve Murphy Quinlan</p>', unsafe_allow_html=True)
