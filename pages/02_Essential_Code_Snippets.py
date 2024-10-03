@@ -836,6 +836,7 @@ git_md = """
 We will use git and a GitHub remote repository to track our changes. You can use git in
 the codespaces virtual machine in
  the same way you would from your local machine.
+ See [this basic intro to git](https://rogerdudler.github.io/git-guide/).
 
 But first, [what is git and version control?](https://arctraining.github.io/swd3-dev/sections/git.html).
 
