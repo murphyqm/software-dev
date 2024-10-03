@@ -855,6 +855,21 @@ machine.
 
 The VSCode plugin "GitGraph" is very useful; this is added by default to the codespaces
 virtual machine but also can be added to your local VSCode installation.
+
+---
+
+## Making version control work for you
+
+Data scientists love to use Jupyter notebooks as a tool for *literate programming*. While notebooks are a fantastic tool, they are useful mainly *in conjunction with properly formatted Python scripts*. Jupyter notebooks do not
+behave well with version control tools due to the extra non-Python code stored in them to allow for the notebook to render.
+
+Ideally, notebooks can be used as part of a development workflow:
+- Notebooks are useful when prototyping code and exploring data. Once functions have been developed, they should be moved to a separate `.py` script and
+imported into the notebook as a module.
+- Notebooks are useful for creating example sets or tutorials for your documentation website.
+- Notebooks are useful to display your final results.
+
+Please don't *only* store your code in notebooks.
 """
 
 #mkdocs basics
@@ -867,7 +882,65 @@ for human users (helping to explain the code and how it works),
 but will *also* be machine-readable and can help to generate
 documentation webpages.
 
-A basic docstring in a function will look something like this:
+### Commenting your code
+
+You can add single-line comments to your code using the `#` symbol,
+or multiline comments by surrounding the comment in triple quotation marks:
+
+```python
+# This is a single line comment
+
+x = 4 * 3  # This is an inline comment
+
+""" 
+This is a multiline comment.
+All the text included between the quotation
+marks is commented out and won't be executed
+
+x = 4 * 3 <- including snippets of code
+"""
+```
+
+How do we ensure comments in our code are useful? We can keep in mind
+these four rules suggested by [Jeff Atwood](https://blog.codinghorror.com/when-good-comments-go-bad/), referenced in this [RealPython tutorial](https://realpython.com/documenting-python-code/):
+
+1. **Keep comments close to the code they are describing.** For example,
+use a single line comment immediately before/after the piece of code it
+describes, rather than creating a large multiline comment elsewhere in the code.
+Inline comments are useful for very brief pointers.
+2. **Keep comment formatting as simple as possible.** Using complex formatting
+(for example, a markdown-style table) in your comments will make it difficult
+to update it and will discourage you from keeping your comments up to date
+and relevant.
+3. **Don't make pointless comments.** It sounds obvious, but don't comment for the sake of it: for example, including a comment that says `# assign the value 25 to the variable x` near the code `x = 25` is a waste of everyone's time! Use
+version control to track changes instead of a "Revision history" comment at the
+top of your script. Excess unnecessary comments distract from the actual useful documentation. Assume the person reading understands the basics of the coding language syntax.
+4. **Write code that needs as few comments as possible.** You should aim to
+write legible, easy to understand code, that is tidy, straightforward, and
+follows good coding conventions. Variable names should be descriptive and
+not require a comment explanation; functions should be short; algorithms
+should be as simple as possible. Lean on documentation standards such as including docstrings and type hints (described below in more detail) to
+reduce the need for ad-hoc comments.
+
+These rules are applicable regardless of the language you are using.
+
+> *A quick aside on in-progress commenting: it can be very useful to use
+> comments as you write and develop your code, either tagged with labels
+> such as `TODO` or `FIXME`, or when writing pseudocode, or when trying 
+> to solve a tricky problem. Don't be afraid to use comments as a tool
+> when developing your code: you can clean them up as they become obsolete.*
+
+---
+
+### Docstrings
+
+Docstrings are organised snippets of documentation inside
+functions that explain what the function does and can
+provide context on the function input and output.
+
+Docstrings are always surrounded by triple quotation marks.
+A very simple docstring can be a single line after the function call,
+while a basic multi-line docstring in a function will look something like this:
 
 ```python
 def function_name(arg1: type, arg2: type) -> return_type:
@@ -881,7 +954,77 @@ def function_name(arg1: type, arg2: type) -> return_type:
     return something
 ```
 
+---
+
+In the devcontainer, we define a number of extensions for VSCode in the codespaces
+virtual machine, including `autodocstring` which will generate a basic
+docstring template for you. For example, we can write a function that looks like
+this:
+
+```python
+def example_function(arg1: str, arg2: float, arg3:int):
+    
+    # lots of code that does interesting things
+    value1 = arg1 + "_result"
+    value2 = arg2 * arg3
+    
+    return value1, value2
+```
+
+In this example, we've added in some **type hints** with the function arguments:
+`(arg1: str, arg2: float, arg3:int)` which provides guidance to the user as to
+the kind of input arguments required.
+
+If we move the cursor to after the colon following the functon definition
+(`def example_function(arg1: str, arg2: float, arg3:int):|`) and press enter
+to go to a new line, and enter triple quotation marks, you will get the option
+to "Generate Docstring". You can click enter and a dcstring template will be
+inserted for you:
+
+```python
+def example_function(arg1: str, arg2: float, arg3:int):
+    """_summary_
+
+    Args:
+        arg1 (str): _description_
+        arg2 (float): _description_
+        arg3 (int): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    
+    # lots of code that does interesting things
+    value1 = arg1 + "_result"
+    value2 = arg2 * arg3
+    
+    return value1, value2
+```
+
+You can then fill this docstring out with details.
+
+> Note: it's best to use the autogenerated docstring feature once you've added in your arguments and their types; otherwise the template will not include these
+sections.
+
+---
+
+### Other code documentation
+
+In additional to individual function docstrings, it's a good idea to
+include package or module docstrings at the top of your Python scripts.
+See the [RealPython: Package and Module Docstring](https://realpython.com/documenting-python-code/#package-and-module-docstrings) section to see examples.
+
+If you're planning on sharing your code more widely, it's a good idea to
+take your docstrings and create a user-friendly documentation website with it.
+This can be done in an automated fashion with packages such as Sphinx or Mkdocs.
+Additionally, it's a good idea to write a more conversational "how-to" guide,
+and include some example scripts to get users up and running quickly with your code.
+
+
 See this in-depth tutorial [for more information on writing documentation](https://realpython.com/documenting-python-code/).
+
+---
+
 
 '''
 
@@ -936,10 +1079,91 @@ To include function-level documentation, just include:
 ```
 ::: YOUR_PACKAGE_NAME.MODULE_NAME
 ```
+
+
 For more detail on customising your `mkdocs` set-up and on writing good documentation, please see this [fantastic RealPython tutorial](https://realpython.com/python-project-documentation-with-mkdocs/).
 """
 
-# tests snippets
+mkdocs_code = """
+```yaml
+site_name: SWD7 - Introduction to Data Visualisation in Python
+
+repo_url: https://github.com/ARCTraining/swd7-notes
+repo_name: SWD7-notes
+
+copyright: By University of Leeds Research Computing Team, Copyright &copy; 2024
+
+theme:
+  name: "material"
+  custom_dir: overrides
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - content.code.copy
+    - navigation.footer
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+plugins:
+- mkdocs-jupyter:
+    ignore_h1_titles: True
+    include_source: True
+  - search
+  - toggle-sidebar
+  - awesome-pages
+  - mermaid2:
+      arguments:
+        theme: 'base'
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+        generic: true
+        block_tag: 'pre'
+  - pymdownx.details
+  - pymdownx.tilde
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.blocks.tab
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+
+nav:
+  - Course content: index.md
+  - Delivery guidelines: guidelines.md
+  - Introduction: 00-Introduction.md
+  - 5 Key Concepts:
+    - 1. Audience: 01-Audience.md
+    - 2. Story: 02-Story.md
+    - 3. Encoding: 03-Encoding.md
+    - 4. Composition: 04-Composition.md
+    - 5. Simplify: 05-Simplify.md
+  - Practical Session:
+    - How to use this resource: nbs/00_explanation.md
+    - Building gridded plots: nbs/gridded_plots.md
+    - 1. Introduction notebook: nbs/01_datavis_solutions.ipynb
+    - 2. Other libraries notebook: nbs/02_datavis_solutions.ipynb
+    - 3. Composition of multi-panel plots notebook: nbs/03_datavis_solutions.ipynb
+    - 4. Exploring heatmaps and legends: nbs/04_datavis_solutions.ipynb
+    - 5. Exploring a dataset: nbs/05_datavis_solutions.ipynb
+```
+"""
 
 
 
@@ -962,6 +1186,8 @@ with tab4:
     st.write(docs_basics)
 
     st.write(mkdocs_md)
+    with st.expander("Click here to see an example detailed yml file"):
+        st.write(mkdocs_code)
 
 
 
