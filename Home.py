@@ -28,8 +28,41 @@ md_intro="""
 Access this page at **software-dev.streamlit.app**
 """
 
+md_timetable = """
+Rough schedule (subject to flexibility and change!)
 
-# st.write(md_header)
+### Day 1
+
+| Session | Time | Duration |
+|---|---|---|
+| Introduction discussion |10:00&mdash;10:30|30 mins|
+| Quick break | | 10 mins |
+| DeReLiCT Code P1 |10:40&mdash;11:10 | 30 mins |
+| Quick break | | 10 mins |
+| DeReLiCT Code P2 | 11:20&mdash;11:50 | 30 mins |
+| Quick break | | 10 mins |
+| Codespaces P1: Linux, git, conda| 12:00&mdash;12:50 | 50 mins |
+| **Lunch** | 13:00&mdash;14:30 | 90 mins |
+| Codespaces P2: Testing | 14:30&mdash;15:20 | 50 mins |
+| Quick break | | 10 mins |
+| Codespaces P3: Project Organisation | 15:30&mdash;16:00 | 30 mins |
+
+
+### Day 2
+
+For the mini project on this day, we will be 
+loosely following [these notes](https://arctraining.github.io/swd3-notes/).
+
+| Session | Time | Duration |
+|---|---|---|
+| Project organisation discussion |10:00&mdash;10:30|30 mins|
+| Codespaces P4: Mini project | | |
+| **Lunch** | 13:00&mdash;14:30 | 90 mins |
+| Codespaces P5: Mini project | | |
+| Closing discussion | 15:30&mdash;16:00 | 30 mins |
+"""
+
+
 
 st.write(md_intro)
 
@@ -56,7 +89,9 @@ To try to fill this gap, this session will hopefully:
 - Instill the importance of good research computing practises, without overwhelming you to the point of sticking your head in the sand and avoiding it!
 """
 st.write(md_intro_01)
-
+st.divider()
+st.write(md_timetable)
+st.divider()
 
 st.header("Introduction presentation")
 components.iframe("https://docs.google.com/presentation/d/e/2PACX-1vSV0N_UzZEqwzBTMn8QE-u3Fsqbeb1-GUOVu9_CWLE031orIUhaPo1xYgjhWuuypMf8L9129SZrB6gE/embed?start=false&loop=false&delayms=60000", height=450)
