@@ -1,0 +1,43 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Sustainable Software Dev
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Maeve
+    family-names: Murphy Quinlan
+    name-particle: Maeve
+    email: earmmu@leeds.ac.uk
+    affiliation: University of Leeds
+    orcid: 'https://orcid.org/0000-0003-2958-1008'
+identifiers:
+  - type: url
+    value: 'https://software-dev.streamlit.app/'
+    description: Webapp URL
+  - type: url
+    value: 'https://github.com/murphyqm/software-dev'
+    description: GitHub Repository
+  - type: doi
+    value: 'https://doi.org/10.5281/zenodo.13868947'
+    description: Zenodo archive
+
+repository-code: 'https://github.com/murphyqm/software-dev'
+url: 'https://software-dev.streamlit.app/'
+abstract: >
+  Contents for an introductory course on software
+  development, including interactive exercises, pdf slides,
+  and links to GitHub codespace templates. This app is built
+  using Python, primarily leverging the streamlit library.
+keywords:
+  - Python
+  - conda
+  - git
+  - software development
+license: MIT
+commit: '7a0b5c0'
+version: v1.0.0
+date-released: '2024-10-01'
