@@ -871,6 +871,21 @@ imported into the notebook as a module.
 - Notebooks are useful to display your final results.
 
 Please don't *only* store your code in notebooks.
+
+### Notebooks, repositories and sensitive data
+
+Of course, your data should be stored in a separate folder to your code. Your raw data should remain unedited, untouched, exactly as collected; processed data should be stored in a separate directory (see the section on project layout). This is obviously mandatory and not just "good practise" when it comes to sensitive data. Your code, stored in a repository, should be completely clean of any data.
+
+**This also applies to notebook output.**
+
+It is _vital_ to ensure there is no identifying information stored as output or cached in your Jupyter Notebooks or various cache files before pushing to GitHub.
+
+There are a number of ways around this; some of these options need to be combined or work together:
+
+- Option 1: the easiest, but worst and most likely to fail. Manually clearing output from your notebook (in Jupyter, using `Edit > clear all outputs`). Do this anyway, but **don't rely on this because some day you will forget**.
+- Option 2: use a plaintext Jupyter Notebook alternative so output isn't an issue. 
+- Option 3: ensure Jupyter Notebook file endings are in your gitignore so you have to specifically add them as an additional manual check. For example, [Jupytext](https://jupytext.readthedocs.io/en/latest/) or [MyST Markdown](https://mystmd.org/) might work well for you.
+- Option 4: Use git hooks or pre-commit framework to strip output from Jupyter Notebooks and ensure this is not pushed to the remote repository. See [nbstripout](https://github.com/kynan/nbstripout#using-nbstripout-as-a-pre-commit-hook).
 """
 
 #mkdocs basics
