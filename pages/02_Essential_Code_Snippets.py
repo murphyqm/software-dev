@@ -844,7 +844,7 @@ But first, [what is git and version control?](https://arctraining.github.io/swd3
 git status # check on status of current git repo
 git branch NAME # create a branch called NAME
 git checkout NAME # swap over to the branch called NAME
-git add . # stage all changed files for commit, you can replace "." with FILE to add a single file called FILE
+git add FILE # stage FILE for commit
 git commit # commit the staged files (this will open your text editor to create a commit message)
 git push origin NAME # push local commits to the remote branch tracking the branch NAME
 ```
