@@ -26,6 +26,13 @@ md_header="""
 
 md_intro=""" 
 Access this page at **software-dev.streamlit.app**
+
+If you found the tools here useful in your  research, or if  you use these materials for 
+teaching, please cite this resource:
+
+Murphy Quinlan, M. (2024). Sustainable Software Dev (Version v1.0.0) [Computer software]. https://github.com/murphyqm/software-dev
+
+[![DOI](https://zenodo.org/badge/833194028.svg)](https://doi.org/10.5281/zenodo.13868947)
 """
 
 md_timetable = """
